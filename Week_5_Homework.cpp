@@ -6,7 +6,7 @@
 #include <iostream>
 #include <conio.h>  // For _kbhit() and _getch() on Windows
 
-const int REFRESH_RATE = 50;  // Refresh rate in milliseconds
+const int REFRESH_RATE = 120;  // Refresh rate in milliseconds
 const int POLLING_RATE = 25;   // Polling rate for keyboard input in milliseconds
 const int MARQUEE_HEIGHT = 15;  // Height of the area where the marquee will bounce
 
@@ -17,7 +17,7 @@ void marqueeThread(MarqueeSession& marqueeSession, KeyboardManager& keyboardMana
     while (running) {
         marqueeSession.update();  // Update marquee position
         marqueeSession.refreshDisplay(keyboardManager.getCommandHistory(), keyboardManager.getCurrentInput()); // Refresh the display
-        std::this_thread::sleep_for(std::chrono::milliseconds(REFRESH_RATE));  // Refresh at regular intervals
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000 / REFRESH_RATE));  // Refresh at regular intervals
     }
 }
 
@@ -25,6 +25,16 @@ void marqueeThread(MarqueeSession& marqueeSession, KeyboardManager& keyboardMana
 void keyboardThread(KeyboardManager& keyboardManager) {
     while (running) {
         if (_kbhit()) { // Check if a key has been pressed
+
+			// if 'exit', stop the threads
+			if (keyboardManager.getCurrentInput() == "exit") {
+				running = false;
+			}
+            else if (keyboardManager.getCurrentInput() == "clear") {
+                // clear the command history
+				keyboardManager.clearCommandHistory();
+            }
+
             char key = _getch();  // Capture the key pressed
             keyboardManager.processInput(key);  // Process the input and update the buffer
         }
@@ -32,6 +42,9 @@ void keyboardThread(KeyboardManager& keyboardManager) {
         std::this_thread::sleep_for(std::chrono::milliseconds(POLLING_RATE));  // Polling interval
     }
 }
+
+// both threads are managed within the main function to achieve centralized control and synchronization.
+// they can indeed be managed separately, but this approach provides a more structured and coordinated way to handle the threads.
 
 int main() {
     // Create a ScreenManager instance

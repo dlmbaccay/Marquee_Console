@@ -37,26 +37,6 @@ void MarqueeSession::update() {
     yPosition += yDirection;
 }
 
-// Get the current text of the marquee
-std::string MarqueeSession::getText() const {
-    return marqueeText;
-}
-
-// Get the current X position of the marquee
-int MarqueeSession::getXPosition() const {
-    return xPosition;
-}
-
-// Get the current Y position of the marquee
-int MarqueeSession::getYPosition() const {
-    return yPosition;
-}
-
-// Get the refresh rate from the base class (ScreenSession)
-int MarqueeSession::getRefreshRate() const {
-    return refreshRate;
-}
-
 // Refresh the display with the marquee, input line, and command history
 void MarqueeSession::refreshDisplay(const std::vector<std::string>& commandHistory, const std::string& currentInput) {
     screenManager.clearScreen();

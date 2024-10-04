@@ -2,7 +2,6 @@
 #define SCREEN_SESSION_H
 
 #include "ScreenManager.h"
-#include <string>
 #include <vector>
 
 class ScreenSession {

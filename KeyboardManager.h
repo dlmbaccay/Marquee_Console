@@ -12,14 +12,10 @@ private:
 public:
     KeyboardManager();
 
+	void processInput(char key);
+	std::string getCurrentInput() const;
     const std::vector<std::string>& getCommandHistory() const;
-
-    std::string getCurrentInput() const;
-
-    void processInput(char key);
-    void clearBuffer();
-    void saveCommand();
-
+	void clearCommandHistory();
 };
 
 #endif // KEYBOARD_MANAGER_H

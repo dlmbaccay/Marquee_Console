@@ -16,13 +16,7 @@ private:
 public:
     MarqueeSession(ScreenManager& manager, const std::string& text, int rate, int height);
 
-    std::string getText() const;
-
-    int getXPosition() const;
-    int getYPosition() const;
-    int getRefreshRate() const;  // Get refresh rate from ScreenSession
-
-    void update();  // Update marquee position
+    void update();
     void refreshDisplay(const std::vector<std::string>& commandHistory, const std::string& currentInput);
 };
 

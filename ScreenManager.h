@@ -6,10 +6,8 @@
 
 class ScreenManager {
 public:
-    int getTerminalWidth();
-
     void clearScreen();
-    void refreshDisplay(const std::string& marqueeText, int marqueePos, const std::vector<std::string>& commandHistory, const std::string& currentInput);
+    int getTerminalWidth();
 };
 
 #endif // SCREEN_MANAGER_H

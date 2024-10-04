@@ -1,6 +1,4 @@
 #include "ScreenSession.h"
-#include <thread>
-#include <chrono>
 
 // Constructor to initialize session
 ScreenSession::ScreenSession(ScreenManager& manager, int rate)
